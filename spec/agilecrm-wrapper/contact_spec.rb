@@ -41,6 +41,13 @@ describe AgileCRMWrapper::Contact do
         contact.delete_tags(contact.tags)
       ).to eq []
     end
+
+    it 'raises error if no email available' do
+      expect(contact).to receive(:get_property).with('email').and_return('')
+      expect{
+        contact.delete_tags(contact.tags)
+      }.to raise_error(AgileCRMWrapper::MethodNotAllowed)
+    end
   end
 
   describe '.search_by_email' do

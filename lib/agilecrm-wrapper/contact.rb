@@ -97,11 +97,19 @@ module AgileCRMWrapper
 
     def delete_tags(tags)
       email = get_property('email')
+      raise AgileCRMWrapper::MethodNotAllowed.new('No email available.') if email.size == 0
+
       response = AgileCRMWrapper.connection.post(
         'contacts/email/tags/delete', "email=#{email}&tags=#{tags}",
         'content-type' => 'application/x-www-form-urlencoded'
       )
-      self.tags = self.tags - tags if response.status == 204
+
+      if response.status == 204
+        self.tagsWithTime = self.tagsWithTime.select do |t|
+          !tags.include? t['tag']
+        end
+        self.tags = self.tags - tags
+      end
     end
 
     def notes
