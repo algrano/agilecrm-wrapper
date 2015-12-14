@@ -10,7 +10,7 @@ module AgileCRMWrapper
         status_code = response.status.to_i
         klass = AgileCRMWrapper::Error.errors[status_code]
         return unless klass
-        fail(klass.from_response(response))
+        fail(klass.new(response))
       end
     end
   end

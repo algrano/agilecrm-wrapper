@@ -3,10 +3,6 @@ module AgileCRMWrapper
     attr_reader :response
 
     class << self
-      def from_response(response, message = '')
-        new(response, message)
-      end
-
       def errors
         @errors ||= {
           400 => AgileCRMWrapper::BadRequest,
@@ -25,7 +21,7 @@ module AgileCRMWrapper
     end
   end
 
-  # Raised when Twitter returns a 4xx HTTP status code
+  # Raised when AgileCRMWrapper returns a 4xx HTTP status code
   class ClientError < Error; end
 
   # Raised when AgileCRMWrapper returns a 400 HTTP status code
