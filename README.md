@@ -127,6 +127,43 @@ AgileCRMWrapper::Note.add_by_email(
 AgileCRMWrapper::Tag.all #=> [...]
 ```
 
+### 4. Working with Tasks
+
+###### List all tasks
+```ruby
+AgileCRMWrapper::Task.all #=> [...]
+```
+
+###### To get an individual task by ID
+```ruby
+AgileCRMWrapper::Task.find(123)
+```
+
+###### To create a new task
+```ruby
+AgileCRMWrapper::Task.create(
+  subject: 'My new Task',
+  contacts: [123, 124],
+  owner_id: 1234,
+  type: 'OTHER',
+  priority_type: 'NORMAL',
+  due: Time.now.to_i
+)
+```
+
+###### To update a single task
+```ruby
+task.update(subject: 'Task update')
+```
+
+###### To delete a single task
+```ruby
+# perform operation directly
+AgileCRMWrapper::Task.delete(123)
+# or
+AgileCRMWrapper::Task.find(123).destroy
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/nozpheratu/agilecrm-wrapper/fork )

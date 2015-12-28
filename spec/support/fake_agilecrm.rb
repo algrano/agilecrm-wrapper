@@ -66,6 +66,34 @@ class FakeAgileCRM < Sinatra::Base
     end
   end
 
+  get '/dev/api/tasks' do
+    json_response 200, 'tasks', 'all_tasks'
+  end
+
+  get '/dev/api/tasks/all' do
+    json_response 200, 'tasks', 'all_tasks'
+  end
+
+  get '/dev/api/tasks/:id' do
+    if params[:id] == '0'
+      status 204
+    else
+      json_response 200, 'tasks', 'get_task'
+    end
+  end
+
+  delete '/dev/api/tasks/:id' do
+    status 204
+  end
+
+  post '/dev/api/tasks' do
+    json_response 200, 'tasks', 'create_task'
+  end
+
+  put '/dev/api/tasks' do
+    json_response 200, 'tasks', 'updated_task'
+  end
+
   private
 
   def json_response(response_code, resource, file_name)

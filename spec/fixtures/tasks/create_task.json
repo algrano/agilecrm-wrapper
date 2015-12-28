@@ -1,0 +1,67 @@
+{
+    "id": 123,
+    "type": "CALL",
+    "priority_type": "NORMAL",
+    "due": 1450224000,
+    "task_completed_time": 0,
+    "task_start_time": 0,
+    "created_time": 1450191371,
+    "is_complete": false,
+    "contacts": [{
+        "id": 5958099965837312,
+        "type": "PERSON",
+        "created_time": 1447366404,
+        "updated_time": 1450191372,
+        "last_contacted": 1450099973,
+        "last_emailed": 0,
+        "last_campaign_emaild": 1450099973,
+        "last_called": 0,
+        "viewed_time": 0,
+        "viewed": {
+            "viewed_time": 1450709601670,
+            "viewer_id": 5679968690896896
+        },
+        "star_value": 0,
+        "lead_score": 0,
+        "tags": ["Tags"],
+        "tagsWithTime": [{
+            "tag": "Tags",
+            "createdTime": 1447366404221,
+            "availableCount": 0,
+            "entity_type": "tag"
+        }],
+        "properties": [{
+            "type": "SYSTEM",
+            "name": "first_name",
+            "value": "Hans"
+        }, {
+            "type": "SYSTEM",
+            "name": "last_name",
+            "value": "Wurst"
+        }, {
+            "type": "SYSTEM",
+            "name": "company",
+            "value": "Hanswurst Coop"
+        }, {
+            "type": "SYSTEM",
+            "name": "email",
+            "subtype": "work",
+            "value": "hans.wurst@email.com"
+        }]
+    }],
+    "subject": "Subject of Task",
+    "entity_type": "task",
+    "notes": [],
+    "note_ids": [],
+    "progress": 0,
+    "status": "YET_TO_START",
+    "deal_ids": [],
+    "taskOwner": {
+        "id": 5679968690896896,
+        "domain": "algrano",
+        "email": "fabio@algrano.com",
+        "name": "Fabio Kuhn",
+        "password": "PASSWORD"
+    },
+    "deals": []
+}
