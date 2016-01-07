@@ -38,15 +38,8 @@ describe AgileCRMWrapper::Contact do
   describe '#delete_tags' do
     it 'removes the tags' do
       expect(
-        contact.delete_tags(contact.tags)
-      ).to eq []
-    end
-
-    it 'raises error if no email available' do
-      expect(contact).to receive(:get_property).with('email').and_return('')
-      expect{
-        contact.delete_tags(contact.tags)
-      }.to raise_error(AgileCRMWrapper::MethodNotAllowed)
+        contact.delete_tags(['sales'])
+      ).to eq ['rspec', 'new']
     end
   end
 
