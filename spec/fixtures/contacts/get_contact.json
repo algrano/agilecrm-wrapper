@@ -40,10 +40,12 @@
   }, {
     "type": "CUSTOM",
     "name": "phone_number",
+    "subtype": "home",
     "value": "1231111111"
   }, {
     "type": "CUSTOM",
     "name": "phone_number",
+    "subtype": "mobile",
     "value": "1232222222"
   }],
   "campaignStatus": [],

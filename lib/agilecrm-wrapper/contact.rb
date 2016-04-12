@@ -120,9 +120,23 @@ module AgileCRMWrapper
       merge!(response.body)
     end
 
-    def get_property(property_name)
+    def select_properties(name_or_hash)
+      properties.select do |a|
+        if name_or_hash.is_a? Hash
+          selected = true
+          name_or_hash.each do |k, v|
+            selected = false if a[k.to_s] != v
+          end
+          selected
+        else
+          a['name'] == name_or_hash.to_s
+        end
+      end
+    end
+
+    def get_property(name_or_hash)
       return unless respond_to?(:properties)
-      arr = properties.select { |a| a['name'] == property_name.to_s }
+      arr = select_properties(name_or_hash)
       if arr.length > 1
         arr.map {|i| i['value'] }
       else

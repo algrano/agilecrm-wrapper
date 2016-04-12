@@ -103,21 +103,55 @@ describe AgileCRMWrapper::Contact do
   describe '#get_property' do
     let(:contact) { AgileCRMWrapper::Contact.find(123) }
 
-    context 'supplied an existing property name' do
-      it 'returns the value' do
-        expect(contact.get_property('email')).to_not be_nil
+    describe 'with string' do
+      context 'supplied an existing property name' do
+        it 'returns the value' do
+          expect(contact.get_property('email')).to_not be_nil
+        end
+      end
+
+      context 'supplied a non-existing property name' do
+        it 'returns nil' do
+          expect(contact.get_property('nil-propety')).to be_nil
+        end
+      end
+
+      context 'two properties share the same name' do
+        it 'returns an array' do
+          expect(contact.get_property('phone_number').class).to eq(Array)
+        end
       end
     end
 
-    context 'supplied a non-existing property name' do
-      it 'returns nil' do
-        expect(contact.get_property('nil-propety')).to be_nil
+    describe 'with hash' do
+      context 'supplied an existing property name' do
+        it 'returns the value' do
+          expect(contact.get_property(name: 'email')).to_not be_nil
+        end
       end
-    end
 
-    context 'two properties share the same name' do
-      it 'returns an array' do
-        expect(contact.get_property('phone_number').class).to eq(Array)
+      context 'supplied a non-existing property name' do
+        it 'returns nil' do
+          expect(contact.get_property(name: 'nil-propety')).to be_nil
+        end
+      end
+
+      context 'two properties share the same name' do
+        it 'returns an array' do
+          expect(contact.get_property(name: 'phone_number').class).to eq(Array)
+        end
+      end
+
+      context 'with subtype' do
+        it 'returns the value' do
+          expect(contact.get_property(name: 'phone_number', subtype: 'home')).to_not be_nil
+        end
+      end
+
+      context 'with non-existing subtype' do
+        it 'returns the value' do
+          expect(contact.get_property(name: 'phone_number', subtype: 'nil-property')).to be_nil
+        end
       end
     end
   end
