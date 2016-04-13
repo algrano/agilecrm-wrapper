@@ -80,7 +80,7 @@ module AgileCRMWrapper
       def parse_property(key, value_or_hash)
         type = system_propety?(key) ? 'SYSTEM' : 'CUSTOM'
         if value_or_hash.is_a? Hash
-          value_or_hash.merge({ 'type' => type, 'name' => key.to_s })
+          value_or_hash.merge('type' => type, 'name' => key.to_s)
         else
           { 'type' => type, 'name' => key.to_s, 'value' => value_or_hash }
         end
@@ -116,10 +116,18 @@ module AgileCRMWrapper
       response.body.map { |note| AgileCRMWrapper::Note.new(note) }
     end
 
-    def update(options = {})
+    def update_attributes(options)
       payload = self.class.parse_contact_fields(options)
       payload['properties'] = merge_properties(payload['properties'])
       merge!(payload)
+    end
+
+    def update(options = {})
+      update_attributes(options)
+      save
+    end
+
+    def save
       response = AgileCRMWrapper.connection.put('contacts', self)
       merge!(response.body)
     end

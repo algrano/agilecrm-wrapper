@@ -108,6 +108,33 @@ describe AgileCRMWrapper::Contact do
     end
   end
 
+  describe '#update_attributes' do
+
+    it 'updates the attributes with the supplied key-value pair(s)' do
+      expect do
+        contact.update_attributes(first_name: 'Foo!')
+      end.to change{
+        contact.get_property('first_name')
+      }.from('Anita').to('Foo!')
+    end
+
+    it 'sets a new attributes with the supplied hash with subtype' do
+      expect do
+        contact.update_attributes(phone: { 'value' => '123 123 123', 'subtype' => 'other' })
+      end.to change{
+        contact.get_property('name' => 'phone', 'subtype' => 'other')
+      }.from(nil).to('123 123 123')
+    end
+
+    it 'updates the attributes with the supplied hash with subtype' do
+      expect do
+        contact.update_attributes(phone: { 'value' => '1233333333', 'subtype' => 'mobile' })
+      end.to change{
+        contact.get_property('name' => 'phone', 'subtype' => 'mobile')
+      }.from('1232222222').to('1233333333')
+    end
+  end
+
   describe '#get_property' do
     let(:contact) { AgileCRMWrapper::Contact.find(123) }
 
