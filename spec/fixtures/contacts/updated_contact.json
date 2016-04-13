@@ -37,6 +37,16 @@
     "type": "CUSTOM",
     "name": "custom_field",
     "value": "Im a custom field!"
+  },{
+    "type": "SYSTEM",
+    "name": "phone",
+    "subtype": "home",
+    "value": "1231111111"
+  }, {
+    "type": "SYSTEM",
+    "name": "phone",
+    "subtype": "mobile",
+    "value": "1233333333"
   }],
   "campaignStatus": [],
   "entity_type": "contact_entity",

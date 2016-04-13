@@ -38,13 +38,13 @@
     "name": "custom_field",
     "value": "Im a custom field!"
   }, {
-    "type": "CUSTOM",
-    "name": "phone_number",
+    "type": "SYSTEM",
+    "name": "phone",
     "subtype": "home",
     "value": "1231111111"
   }, {
-    "type": "CUSTOM",
-    "name": "phone_number",
+    "type": "SYSTEM",
+    "name": "phone",
     "subtype": "mobile",
     "value": "1232222222"
   }],

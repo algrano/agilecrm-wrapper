@@ -77,9 +77,13 @@ module AgileCRMWrapper
 
       private
 
-      def parse_property(key, value)
+      def parse_property(key, value_or_hash)
         type = system_propety?(key) ? 'SYSTEM' : 'CUSTOM'
-        { 'type' => type, 'name' => key.to_s, 'value' => value }
+        if value_or_hash.is_a? Hash
+          value_or_hash.merge({ 'type' => type, 'name' => key.to_s })
+        else
+          { 'type' => type, 'name' => key.to_s, 'value' => value_or_hash }
+        end
       end
 
       def system_propety?(key)
@@ -166,7 +170,7 @@ module AgileCRMWrapper
     def merge_properties(new_properties)
       properties.map do |h|
         new_properties.delete_if do |h2|
-          if h['name'] == h2['name']
+          if h['name'] == h2['name'] && h['subtype'] == h2['subtype']
             h['value'] = h2['value']
             true
           end

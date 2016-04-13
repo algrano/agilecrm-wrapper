@@ -98,6 +98,14 @@ describe AgileCRMWrapper::Contact do
         contact.get_property('first_name')
       }.from('Anita').to('Foo!')
     end
+
+    it 'updates the receiving contact with the supplied hash with subtype' do
+      expect do
+        contact.update(phone: { 'value' => '1233333333', 'subtype' => 'mobile' })
+      end.to change{
+        contact.get_property('name' => 'phone', 'subtype' => 'mobile')
+      }.from('1232222222').to('1233333333')
+    end
   end
 
   describe '#get_property' do
@@ -118,7 +126,7 @@ describe AgileCRMWrapper::Contact do
 
       context 'two properties share the same name' do
         it 'returns an array' do
-          expect(contact.get_property('phone_number').class).to eq(Array)
+          expect(contact.get_property('phone').class).to eq(Array)
         end
       end
     end
@@ -138,19 +146,19 @@ describe AgileCRMWrapper::Contact do
 
       context 'two properties share the same name' do
         it 'returns an array' do
-          expect(contact.get_property(name: 'phone_number').class).to eq(Array)
+          expect(contact.get_property(name: 'phone').class).to eq(Array)
         end
       end
 
       context 'with subtype' do
         it 'returns the value' do
-          expect(contact.get_property(name: 'phone_number', subtype: 'home')).to_not be_nil
+          expect(contact.get_property(name: 'phone', subtype: 'home')).to_not be_nil
         end
       end
 
       context 'with non-existing subtype' do
         it 'returns the value' do
-          expect(contact.get_property(name: 'phone_number', subtype: 'nil-property')).to be_nil
+          expect(contact.get_property(name: 'phone', subtype: 'nil-property')).to be_nil
         end
       end
     end
