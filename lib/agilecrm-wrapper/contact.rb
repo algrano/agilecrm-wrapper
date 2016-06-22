@@ -75,6 +75,18 @@ module AgileCRMWrapper
         payload
       end
 
+      # Increment or decrement contact score by email address
+      # Positive amount => increment
+      # Negative amount => decrement
+      def update_score(email, score)
+        payload = { 'email' => email, 'score' => score}
+        response = AgileCRMWrapper.form_connection.post('contacts/add-score', payload)
+        if response && response.status == 200
+          contact = new(response.body)
+        end
+        contact
+      end
+
       private
 
       def parse_property(key, value_or_hash)

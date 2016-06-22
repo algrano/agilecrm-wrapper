@@ -26,6 +26,10 @@ class FakeAgileCRM < Sinatra::Base
     end
   end
 
+  post '/dev/api/contacts/add-score' do
+    json_response 200, 'contacts', 'create_contact'
+  end
+
   get '/dev/api/search' do
     json_response 200, 'contacts', 'search'
   end

@@ -35,6 +35,14 @@ describe AgileCRMWrapper::Contact do
     end
   end
 
+  describe '.update_score' do
+    context 'given a email' do
+      subject { AgileCRMWrapper::Contact.update_score('anitadrink@example.com', 10) }
+
+      its(:class) { should eq AgileCRMWrapper::Contact }
+    end
+  end
+
   describe '#delete_tags' do
     it 'removes the tags' do
       expect(

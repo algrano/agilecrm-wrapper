@@ -45,5 +45,22 @@ module AgileCRMWrapper
         conn.adapter(Faraday.default_adapter)
       end
     end
+
+    def form_connection
+      @form_connection ||= default_form_connection
+    end
+
+    def default_form_connection
+      options = {
+        headers: { 'Accept' => 'application/json' }
+      }
+      Faraday.new(endpoint, options) do |conn|
+        conn.request(:url_encoded)
+        conn.request(:basic_auth, configuration.email, configuration.api_key)
+        conn.response(:json, content_type: /\bjson$/)
+        conn.response(:agilecrm_error)
+        conn.adapter(Faraday.default_adapter)
+      end
+    end
   end
 end
